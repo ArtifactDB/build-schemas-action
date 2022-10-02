@@ -1,0 +1,22 @@
+name: 'Build JSON schemas'
+description: 'Build, validate and prettify JSON schemas'
+inputs:
+  raw:
+    description: "Path to the input directory containing the raw schemas"
+    required: false
+    default: "raw"
+  docs:
+    description: "Path to the output directory containing the human-readable schemas"
+    required: false
+    default: "public"
+  title:
+    description: "Title for the landing page"
+    required: false
+    default: "Schema overview"
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.raw }}
+    - ${{ inputs.docs }}
+    - ${{ inputs.title }}
