@@ -11,11 +11,11 @@ This action provides a "one-click" method for preparing JSON schemas for use in 
 - It converts the schemas into human-readable webpages using the [`json-schema-for-humans`](https://github.com/coveooss/json-schema-for-humans) packge.
   It also creates an index page in preparation for publication to GitHub Pages.
 
-To use, simply add the following to your GitHub Actions workflow:
+To use, simply add the following step to your GitHub Actions workflow:
 
 ```yaml
     - name: Build schemas
-      uses: ArtifactDB/build-schemas-action@master
+      uses: ArtifactDB/build-schemas-action@0.1.0
       with:
         title: 'My schema overview'
 ```
@@ -24,6 +24,6 @@ The following optional arguments can be specified:
 
 |Option|Default|Description|
 |---|---|---|
-|`raw`|`raw`|Input directory containing the raw JSON schemas.|
-|`docs`|`public`|Output directory containing the prettified documentation. This can be directly used for upload to GitHub pages.| 
-|`title`|`Schema overview`|Title to use for the index page.|
+|`raw`|raw|Input directory containing the raw JSON schemas.|
+|`docs`|public|Output directory containing the prettified documentation. This can be directly used for upload to GitHub Pages.| 
+|`title`|Schema overview|Title to use for the index page.|
