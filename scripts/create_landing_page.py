@@ -14,7 +14,7 @@ for i, x in enumerate(files):
     htmls = []
     for y in within:
         if y[-4:] == "html":
-            htmls.append("<a href=\"html/" + x + "/" + y + "\">" + y[:-5] + "</a> (<a href=\"raw/" + x + "/" + y[:-5] + ".json" + "\">json</a>)")
+            htmls.append("<a href=\"html/" + x + "/" + y + "\">" + y[:-5] + "</a> (<a href=\"json/" + x + "/" + y[:-5] + ".json" + "\">json</a>)")
     available.append("<li class=\"list-group-item\">" + x + ": " + ', '.join(htmls) + "</li>")
 
 available = "<ul class=\"list-group\">\n" + '\n'.join(available) + "</ul>"
