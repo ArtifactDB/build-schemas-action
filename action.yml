@@ -15,7 +15,7 @@ inputs:
     default: "Schema overview"
 runs:
   using: 'docker'
-  image: 'ghcr.io/artifactdb/build-schemas-action/builder:master'
+  image: 'docker://ghcr.io/artifactdb/build-schemas-action/builder:master'
   args:
     - ${{ inputs.raw }}
     - ${{ inputs.docs }}
