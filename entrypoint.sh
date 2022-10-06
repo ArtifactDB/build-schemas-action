@@ -4,15 +4,16 @@ set -e
 set -u
 
 raw=$1
-docs=$2
-title=$3
+resolved=$2
+docs=$3
+title=$4
 
 echo "Raw schema directory is $raw"
+echo "Resolved schema directory is $resolved"
 echo "Documentation directory is $docs"
 echo "Landing page title is $title"
 
 # Resolving the schemas.
-resolved=$docs/json
 mkdir -p $resolved
 python3 /scripts/resolve_allOf.py $raw $resolved
 
@@ -24,19 +25,19 @@ do
 done
 
 # Generating pretty HTMLs.
-output=$docs/html
-mkdir -p $output
+mkdir -p $docs
 
 for x in ${all_json}
 do
     base=$(basename $x | sed "s/.json/.html/")
     dir=$(dirname $x | xargs basename)
-    mkdir -p $output/$dir
-    tmp=${output}/${dir}/tmp-${base}.json
+    mkdir -p $docs/$dir
+    tmp=${docs}/${dir}/tmp-${base}.json
 
     echo "Prettifying $x"
     python3 /scripts/nest_allOf.py ${x} ${tmp}
-    generate-schema-doc ${tmp} ${output}/${dir}/${base}
+    generate-schema-doc ${tmp} ${docs}/${dir}/${base}
+    cp $x ${docs}/${dir}
     rm ${tmp}
 done
 

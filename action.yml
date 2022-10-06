@@ -5,6 +5,10 @@ inputs:
     description: "Path to the input directory containing the raw schemas"
     required: false
     default: "raw"
+  resolved:
+    description: "Path to the out directory containing the resolved schemas"
+    required: false
+    default: "resolved"
   docs:
     description: "Path to the output directory containing the human-readable schemas"
     required: false
@@ -18,5 +22,6 @@ runs:
   image: 'docker://ghcr.io/artifactdb/build-schemas-action/builder:master'
   args:
     - ${{ inputs.raw }}
+    - ${{ inputs.resolved }}
     - ${{ inputs.docs }}
     - ${{ inputs.title }}

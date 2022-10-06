@@ -3,18 +3,19 @@ title = sys.argv[1]
 dirpath = sys.argv[2]
 
 import os
-files = os.listdir(os.path.join(dirpath, "html"))
+files = os.listdir(os.path.join(dirpath))
 files.sort()
 available = []
 for i, x in enumerate(files):
-    target = os.path.join(dirpath, "html", x)
+    target = os.path.join(dirpath, x)
     if not os.path.isdir(target):
         continue
+
     within = os.listdir(target)
     htmls = []
     for y in within:
-        if y[-4:] == "html":
-            htmls.append("<a href=\"html/" + x + "/" + y + "\">" + y[:-5] + "</a> (<a href=\"json/" + x + "/" + y[:-5] + ".json" + "\">json</a>)")
+        if y.endswith(".html"):
+            htmls.append("<a href=\"" + x + "/" + y + "\">" + y[:-5] + "</a> (<a href=\"" + x + "/" + y[:-5] + ".json" + "\">json</a>)")
     available.append("<li class=\"list-group-item\">" + x + ": " + ', '.join(htmls) + "</li>")
 
 available = "<ul class=\"list-group\">\n" + '\n'.join(available) + "</ul>"

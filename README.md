@@ -25,5 +25,6 @@ The following optional arguments can be specified:
 |Option|Default|Description|
 |---|---|---|
 |`raw`|raw|Input directory containing the raw JSON schemas.|
+|`resolved`|resolved|Output directory containing the resolved JSON schemas.|
 |`docs`|public|Output directory containing the prettified documentation. This can be directly used for upload to GitHub Pages.| 
 |`title`|Schema overview|Title to use for the index page.|
