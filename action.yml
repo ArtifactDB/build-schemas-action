@@ -19,7 +19,7 @@ inputs:
     default: "Schema overview"
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/artifactdb/build-schemas-action/builder:master'
+  image: 'docker://ghcr.io/artifactdb/build-schemas-action/builder:v0.2.0'
   args:
     - ${{ inputs.raw }}
     - ${{ inputs.resolved }}
