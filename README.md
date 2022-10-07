@@ -28,3 +28,4 @@ The following optional arguments can be specified:
 |`resolved`|resolved|Output directory containing the resolved JSON schemas.|
 |`docs`|public|Output directory containing the prettified documentation. This can be directly used for upload to GitHub Pages.| 
 |`title`|Schema overview|Title to use for the index page.|
+|`tarball`||Output tarball containing the resolved JSON schemas. If an empty string, no tarball is created.|

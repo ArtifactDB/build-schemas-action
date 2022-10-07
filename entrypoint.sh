@@ -7,11 +7,16 @@ raw=$1
 resolved=$2
 docs=$3
 title=$4
+bundle=$5
 
 echo "Raw schema directory is $raw"
 echo "Resolved schema directory is $resolved"
 echo "Documentation directory is $docs"
 echo "Landing page title is $title"
+if [[ $bundle != "" ]]
+then
+    echo "Creating bundle at $bundle"
+fi
 
 # Resolving the schemas.
 mkdir -p $resolved
@@ -43,3 +48,9 @@ done
 
 # Creating a landing page.
 python3 /scripts/create_landing_page.py "$title" $docs > $docs/index.html
+
+# Creating a bundle at the target.
+if [[ $bundle != "" ]]
+then
+    tar -czvf $bundle $resolved
+fi

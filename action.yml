@@ -6,7 +6,7 @@ inputs:
     required: false
     default: "raw"
   resolved:
-    description: "Path to the out directory containing the resolved schemas"
+    description: "Path to the output directory containing the resolved schemas"
     required: false
     default: "resolved"
   docs:
@@ -17,6 +17,10 @@ inputs:
     description: "Title for the landing page"
     required: false
     default: "Schema overview"
+  tarball:
+    description: "Path to an output tarball containing all resolved schemas."
+    required: false
+    default: ""
 runs:
   using: 'docker'
   image: 'docker://ghcr.io/artifactdb/build-schemas-action/builder:master'
@@ -25,3 +29,4 @@ runs:
     - ${{ inputs.resolved }}
     - ${{ inputs.docs }}
     - ${{ inputs.title }}
+    - ${{ inputs.tarball }}
