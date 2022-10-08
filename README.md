@@ -2,7 +2,7 @@
 
 This action provides a "one-click" method for preparing JSON schemas for use in an ArtifactDB instance.
 
-- It resolves `allOf` statements by merging together `properties` from all referenced subschemas.
+- It resolves `$ref` statements by merging together properties from all referenced subschemas.
   This produces a schema that has a single `properties`, which is easier to parse by both humans and machines.
   The centralization of properties also allows us to set `additionalProperties: false`, which allows for stricter validation.
   (This would not be possible if properties are fragmented into different `allOf` subschemas.
@@ -24,8 +24,11 @@ The following optional arguments can be specified:
 
 |Option|Default|Description|
 |---|---|---|
-|`raw`|raw|Input directory containing the raw JSON schemas.|
-|`resolved`|resolved|Output directory containing the resolved JSON schemas.|
-|`docs`|public|Output directory containing the prettified documentation. This can be directly used for upload to GitHub Pages.| 
-|`title`|Schema overview|Title to use for the index page.|
-|`tarball`||Output tarball containing the resolved JSON schemas. If an empty string, no tarball is created.|
+|`do_resolve`|true|Whether to resolve subschema references in the raw schemas.|
+|`do_validate`|true|Whether to validate the resolved schemas.|
+|`do_prettify`|true|Whether to prettify the resolved schemas.|
+|`path_raw`|raw|Path to the input directory containing the raw schemas. Only used if `do_resolve = true`.|
+|`path_resolved`|resolved|Path to the directory containing the resolved schemas. This is an output directory if `do_resolve = true`, otherwise it is an input directory that already contains resolved schemas.|
+|`path_docs`|public|Path to the output directory containing the human-readable schemas. Only used if `do_prettify = true`.|
+|`docs_title`|Schema overview|Title for the landing page. Only required `do_prettify = true`.|
+|`path_tarball`||Path to an output tarball containing all resolved schemas. If this is empty, no tarball is created.|c

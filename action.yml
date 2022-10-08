@@ -1,32 +1,47 @@
 name: 'Build JSON schemas'
-description: 'Build, validate and prettify JSON schemas'
+description: 'Resolve, validate and prettify JSON schemas'
 inputs:
-  raw:
-    description: "Path to the input directory containing the raw schemas"
+  do_resolve:
+    description: "Whether to resolve subschema references in the raw schemas."
+    required: false
+    default: 'true'
+  do_validate:
+    description: "Whether to validate the resolved schemas."
+    required: false
+    default: 'true'
+  do_prettify:
+    description: "Whether to prettify the resolved schemas."
+    required: false
+    default: 'true'
+  path_raw:
+    description: "Path to the input directory containing the raw schemas. Only used if `do_resolve = true`."
     required: false
     default: "raw"
-  resolved:
-    description: "Path to the output directory containing the resolved schemas"
+  path_resolved:
+    description: "Path to the directory containing the resolved schemas. This is an output directory if `do_resolve = true`, otherwise it is an input directory that already contains resolved schemas."
     required: false
     default: "resolved"
-  docs:
-    description: "Path to the output directory containing the human-readable schemas"
+  path_docs:
+    description: "Path to the output directory containing the human-readable schemas. Only used if `do_prettify = true`."
     required: false
     default: "public"
-  title:
-    description: "Title for the landing page"
+  docs_title:
+    description: "Title for the landing page. Only required `do_prettify = true`."
     required: false
     default: "Schema overview"
-  tarball:
-    description: "Path to an output tarball containing all resolved schemas."
+  path_tarball:
+    description: "Path to an output tarball containing all resolved schemas. If this is empty, no tarball is created."
     required: false
     default: ""
 runs:
   using: 'docker'
   image: 'docker://ghcr.io/artifactdb/build-schemas-action/builder:master'
   args:
-    - ${{ inputs.raw }}
-    - ${{ inputs.resolved }}
-    - ${{ inputs.docs }}
-    - ${{ inputs.title }}
-    - ${{ inputs.tarball }}
+    - ${{ inputs.do_resolve }}
+    - ${{ inputs.do_validate }}
+    - ${{ inputs.do_prettify }}
+    - ${{ inputs.path_raw }}
+    - ${{ inputs.path_resolved }}
+    - ${{ inputs.path_docs }}
+    - ${{ inputs.docs_title }}
+    - ${{ inputs.path_tarball }}
