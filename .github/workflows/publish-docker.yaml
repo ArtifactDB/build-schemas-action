@@ -20,7 +20,7 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/heads\//}
 
       - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: ${{ github.repository }}/builder:${{ steps.get_version.outputs.VERSION }}
           username: ${{ github.actor }}
