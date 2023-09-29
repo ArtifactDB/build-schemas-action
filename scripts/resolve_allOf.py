@@ -47,7 +47,7 @@ def resolve(obj, wd, all_schemas={}, top_level=False):
         if "$ref" in obj:
             target = os.path.normpath(os.path.join(wd, obj["$ref"]))
             if not target in all_schemas:
-                with open(target, "rU") as f:
+                with open(target, "r") as f:
                     loaded = json.load(f)
                     all_schemas[target] = resolve(loaded, os.path.dirname(target), all_schemas, top_level = ("$schema" in loaded))
             obj = all_schemas[target]
@@ -121,7 +121,7 @@ if __name__ == "__main__":
         bname = os.path.basename(fname)
 
         if dname[0] != "_": 
-            with open(fname, "rU") as f:
+            with open(fname, "r") as f:
                 out = json.load(f)
 
             out2 = resolve(out, curdir, top_level=True, all_schemas=all_schemas)
