@@ -29,7 +29,7 @@ then
     for x in ${all_json}
     do
         echo "Validating $x"
-        jsonschema -i $x /schema-07.json
+        check-jsonschema --check-metaschema $x
     done
     echo ""
 fi

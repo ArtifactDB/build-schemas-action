@@ -1,6 +1,6 @@
 FROM python:3.9
 
-RUN pip install json-schema-for-humans==0.46 jsonschema==4.16.0
+RUN pip install json-schema-for-humans==0.46 check-jsonschema==0.27.0
 
 COPY scripts /scripts
 
