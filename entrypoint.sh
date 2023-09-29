@@ -49,7 +49,10 @@ then
 
         echo "Prettifying $x"
         python3 /scripts/nest_allOf.py ${x} ${tmp}
-        generate-schema-doc ${tmp} ${docs}/${dir}/${base}
+        generate-schema-doc \
+            --config description_is_markdown=true \
+            --config collapse_long_descriptions=false \
+            ${tmp} ${docs}/${dir}/${base}
         cp $x ${docs}/${dir}
         rm ${tmp}
     done
