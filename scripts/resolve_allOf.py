@@ -3,11 +3,27 @@
 import json
 import os
 
+
+def combine_strings(arr):
+    output = ""
+    for x in arr:
+        if output and not x.endswith("\n"):
+            output += " "
+        output += x
+    if output.endswith("\n"):
+        output = output[:-1]
+    return output
+
+
 def resolve(obj, wd, all_schemas={}, top_level=False):
     if isinstance(obj, list):
         for i, v in enumerate(obj):
             obj[i] = resolve(v, wd, all_schemas)
     elif isinstance(obj, dict):
+        if "_description" in obj:
+            obj["description"] = combine_strings(obj["_description"])
+            del obj["_description"]
+
         if "allOf" in obj:
             # Resolving all those with top-level ref's. We may still need to
             # keep the 'allOf' in case there's non-ref elements in there, e.g.,
