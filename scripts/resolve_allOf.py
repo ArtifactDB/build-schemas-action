@@ -32,7 +32,9 @@ def resolve(obj, wd, all_schemas={}, top_level=False):
             other = []
             for v in obj["allOf"]:
                 res = resolve(v, wd, all_schemas)
-                if "$ref" in v or top_level:
+                if list(sorted(res.keys())) == [ "if", "then" ]:
+                    other.append(res)
+                elif "$ref" in v or top_level:
                     included.append(res)
                 else:
                     other.append(res)
