@@ -15,6 +15,9 @@ def combine_strings(arr):
     return output
 
 
+conditions = set([ "if", "then", "else", "not" ])
+
+
 def resolve(obj, wd, all_schemas={}, top_level=False):
     if isinstance(obj, list):
         for i, v in enumerate(obj):
@@ -32,7 +35,14 @@ def resolve(obj, wd, all_schemas={}, top_level=False):
             other = []
             for v in obj["allOf"]:
                 res = resolve(v, wd, all_schemas)
-                if list(sorted(res.keys())) == [ "if", "then" ]:
+
+                conditions_only = True
+                for k in res.keys():
+                    if k not in conditions:
+                        conditions_only = False
+                        break
+
+                if conditions_only:
                     other.append(res)
                 elif "$ref" in v or top_level:
                     included.append(res)
